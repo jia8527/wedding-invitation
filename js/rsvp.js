@@ -86,21 +86,20 @@ function isValidName(value) {
 
     /*
      * Dozvoljava:
-     * - slova
-     * - srpska slova
+     * - jedno ili više imena/reči
+     * - srpska i druga latinična slova
      * - razmak
      * - crtica
      * - apostrof
      *
-     * Ne dozvoljava brojeve.
+     * Ne dozvoljava brojeve niti druge specijalne karaktere.
      */
 
     const namePattern =
-        /^[A-Za-zČĆŽŠĐčćžšđÀ-ž]+(?:[\s'-][A-Za-zČĆŽŠĐčćžšđÀ-ž]+)+$/;
+        /^[A-Za-zČĆŽŠĐčćžšđÀ-ž]+(?:[\s'-][A-Za-zČĆŽŠĐčćžšđÀ-ž]+)*$/;
 
     return namePattern.test(name);
 }
-
 
 function setFieldError(input, message) {
 
@@ -170,7 +169,6 @@ function addGuest() {
 
     guestIndex++;
 
-
     const guestCard =
         document.createElement("div");
 
@@ -183,27 +181,6 @@ function addGuest() {
 
 
     guestCard.innerHTML = `
-
-        <div class="guest-card-header">
-
-            <span class="guest-number">
-                ${String(currentGuests + 2).padStart(2, "0")}
-            </span>
-
-            <div>
-
-                <p class="guest-label">
-                    Gost
-                </p>
-
-                <h3>
-                    Osoba ${currentGuests + 1}
-                </h3>
-
-            </div>
-
-        </div>
-
 
         <div class="form-group">
 
@@ -261,33 +238,23 @@ function addGuest() {
 
                 </label>
 
+                <label class="radio-option">
+
+                    <input
+                        type="radio"
+                        name="guest${guestIndex}Menu"
+                        value="Dečji"
+                    >
+
+                    <span>
+                        Dečji
+                    </span>
+
+                </label>
+
             </div>
 
         </fieldset>
-
-
-        <div class="form-group">
-
-            <label for="guest${guestIndex}Allergies">
-
-                Alergije / posebne napomene
-
-                <span class="optional">
-                    (opciono)
-                </span>
-
-            </label>
-
-            <input
-                type="text"
-                id="guest${guestIndex}Allergies"
-                name="guest${guestIndex}Allergies"
-                placeholder="Npr. orašasti plodovi, gluten..."
-                autocomplete="off"
-            >
-
-        </div>
-
 
         <button
             type="button"
@@ -528,17 +495,6 @@ attendanceInputs.forEach(
                         );
 
 
-                    // Očisti alergije
-                    const allergies =
-                        document.getElementById(
-                            "mainAllergies"
-                        );
-
-                    if (allergies) {
-                        allergies.value = "";
-                    }
-
-
                     // Očisti smeštaj
                     document
                         .querySelectorAll(
@@ -658,7 +614,7 @@ document.addEventListener(
 
             setFieldError(
                 input,
-                "Unesite ime i prezime bez brojeva."
+                "Unesite ime i prezime."
             );
 
         } else {
@@ -706,12 +662,6 @@ function collectGuests() {
                 );
 
 
-            const allergiesInput =
-                card.querySelector(
-                    `input[name="guest${index}Allergies"]`
-                );
-
-
             guests.push({
 
                 name:
@@ -723,12 +673,6 @@ function collectGuests() {
                     menuInput
                         ? menuInput.value
                         : "",
-
-                allergies:
-                    allergiesInput
-                        ? allergiesInput.value.trim()
-                        : ""
-
             });
 
         }
@@ -774,7 +718,7 @@ function validateForm() {
 
         setFieldError(
             nameInput,
-            "Unesite ime i prezime bez brojeva."
+            "Unesite ime i prezime."
         );
 
         valid = false;
@@ -904,7 +848,7 @@ function validateForm() {
 
                     setFieldError(
                         nameInput,
-                        "Unesite ime i prezime bez brojeva."
+                        "Unesite ime i prezime."
                     );
 
                     valid = false;
@@ -1034,20 +978,6 @@ form.addEventListener(
                         )?.value || ""
                     )
                     : "",
-
-
-            mainAllergies:
-                attending
-                    ? (
-                        document
-                            .getElementById(
-                                "mainAllergies"
-                            )
-                            ?.value
-                            .trim() || ""
-                    )
-                    : "",
-
 
             guests:
                 attending

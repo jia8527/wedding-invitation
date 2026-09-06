@@ -33,43 +33,55 @@
 </head>
 
 <body>
+<!-- =========================================================
+     ENVELOPE INTRO
+     ========================================================= -->
 
-<header class="site-header">
+<div id="envelopeIntro" class="envelope-intro">
 
-    <a
-        class="monogram"
-        href="#hero"
-        aria-label="Početak stranice"
-    >
-        J&amp;A
-    </a>
+    <div class="envelope-intro-content">
 
-    <button
-        class="menu-toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="site-nav"
-    >
-        <span></span>
-        <span></span>
+        <div class="envelope-scene">
 
-        <span class="sr-only">
-            Otvori meni
-        </span>
-    </button>
+            <div class="envelope" id="envelope">
+                <div class="envelope-back"></div>
 
-    <nav
-        id="site-nav"
-        class="site-nav"
-        aria-label="Glavna navigacija"
-    >
-        <a href="#story">Naš dan</a>
-        <a href="#location">Lokacija</a>
-        <a href="#rsvp">RSVP</a>
-    </nav>
+                <div class="invitation-card">
 
-</header>
+                    <div class="invitation-monogram">
+                        J&amp;A
+                    </div>
 
+                    <div class="invitation-date">
+                        08 · 05 · 2027
+                    </div>
+
+                </div>
+
+                <div class="envelope-front"></div>
+
+                <div class="envelope-flap"></div>
+
+                <!-- Wax seal -->
+                <div class="wax-seal">
+                    <span>J&amp;A</span>
+                </div>
+
+            </div>
+
+            <button
+                id="openInvitation"
+                class="open-invitation"
+                type="button"
+            >
+                Otvori pozivnicu
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 <main>
 
@@ -351,7 +363,7 @@
                                 >
                             
                                 <span>
-                                    Ne dolazim
+                                    Nažalost, ne
                                 </span>
                             
                             </label>
@@ -386,7 +398,6 @@
                                         name="mainMenu"
                                         value="Standardni"
                                     >
-                                
                                     <span>
                                         Standardni
                                     </span>
@@ -407,33 +418,23 @@
                                     </span>
                                 
                                 </label>
+                                <label class="radio-option">
+                                
+                                    <input
+                                        type="radio"
+                                        name="mainMenu"
+                                        value="Dečji"
+                                    >
+                                
+                                    <span>
+                                        Dečji
+                                    </span>
+                                
+                                </label>
                             
                             </div>
                         
                         </fieldset>
-                    
-                    
-                        <div class="form-group">
-                        
-                            <label for="mainAllergies">
-                            
-                                Alergije / posebne napomene
-                            
-                                <span class="optional">
-                                    (opciono)
-                                </span>
-                            
-                            </label>
-                        
-                            <input
-                                type="text"
-                                id="mainAllergies"
-                                name="mainAllergies"
-                                placeholder="Npr. orašasti plodovi, gluten..."
-                                autocomplete="off"
-                            >
-                        
-                        </div>
                     
                     </div>
                 
@@ -456,15 +457,10 @@
                         </p>
                     
                         <h3>
-                            Ko dolazi sa vama?
+                            Da li neko dolazi sa vama?
                         </h3>
                     
-                        <p>
-                            Dodajte osobe koje dolaze sa vama.
-                        </p>
-                    
                     </div>
-                
                 
                     <div
                         id="guestsContainer"
