@@ -2,610 +2,215 @@
 <html lang="sr">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Pozivnica za venčanje Jelene i Aleksandra.">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1"
-    >
+    <meta property="og:title" content="Jelena &amp; Aleksandar">
+    <meta property="og:description" content="Radujemo se da ovaj dan proslavimo zajedno sa vama.">
 
-    <meta
-        name="description"
-        content="Pozivnica za venčanje Jelene i Aleksandra."
-    >
-
-    <meta
-        property="og:title"
-        content="Jelena & Aleksandar"
-    >
-
-    <meta
-        property="og:description"
-        content="Radujemo se da ovaj dan proslavimo zajedno sa vama."
-    >
-
-    <title>Jelena & Aleksandar | 08. maj 2027.</title>
+    <title>Jelena &amp; Aleksandar | 08. maj 2027.</title>
     <link rel="icon" type="image/png" href="./images/favicon.png">
     
-    <link
-        rel="stylesheet"
-        href="./css/style.css"
-    >
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-<!-- =========================================================
-     ENVELOPE INTRO
-     ========================================================= -->
 
+<!-- ENVELOPE INTRO OVERLAY -->
 <div id="envelopeIntro" class="envelope-intro">
-
     <div class="envelope-intro-content">
-
         <div class="envelope-scene">
 
-            <div class="envelope" id="envelope">
-                <div class="envelope-back"></div>
-
-                <div class="invitation-card">
-
-                    <div class="invitation-monogram">
-                        J&amp;A
-                    </div>
-
-                    <div class="invitation-date">
-                        08 · 05 · 2027
-                    </div>
-
-                </div>
-
-                <div class="envelope-front"></div>
-
-                <div class="envelope-flap"></div>
-
-                <!-- Wax seal -->
-                <div class="wax-seal">
-                    <span>J&amp;A</span>
-                </div>
-
-            </div>
-
-            <button
-                id="openInvitation"
-                class="open-invitation"
-                type="button"
-            >
-                Otvori pozivnicu
-            </button>
+                        <div class="envelope" id="envelope">
+                            <div class="envelope-back"></div>
+                        
+                            <div class="invitation-card">
+                                <div class="invitation-content">
+                                    <div class="invitation-monogram">J&A</div>
+                                    <div class="invitation-date">08.05.2027.</div>
+                                </div>
+                            </div>
+                        
+                            <div class="envelope-pocket">
+                                <div class="flap-left"></div>
+                                <div class="flap-right"></div>
+                                <div class="flap-bottom"></div>
+                            </div>
+                        
+                            <div class="envelope-flap-top">
+                                <span class="envelope-flap-edge envelope-flap-edge-left"></span>
+                                <span class="envelope-flap-edge envelope-flap-edge-right"></span>
+                            </div>
+                        
+                            <div class="wax-seal">
+                                <span>J&A</span>
+                            </div>
+                        </div>
+                    
+                        <button class="open-invitation" id="openInvitation" type="button">
+                            Otvori pozivnicu
+                        </button>
 
         </div>
-
     </div>
-
 </div>
 
 <main>
-
-    <!-- =====================================================
-         HERO
-         ===================================================== -->
-
-    <section
-        id="hero"
-        class="hero section-full"
-    >
-
+    <!-- HERO -->
+    <section id="hero" class="hero section-full">
         <div class="hero-media">
-            <img
-                src="./images/jia2.jpg"
-                alt="Jelena i Aleksandar"
-            >
+            <picture>
+                <source media="(max-width: 767px)" srcset="./images/jia-mobile.jpg">
+                <img src="./images/jia2.jpg" alt="Jelena i Aleksandar">
+            </picture>
         </div>
-
         <div class="hero-overlay"></div>
-
         <div class="hero-content reveal">
-
-            <p class="eyebrow">
-                Pozivamo vas da budete sa nama
-            </p>
-
-            <h1>
-                Jelena
-                <span>&amp;</span>
-                Aleksandar
-            </h1>
-
-            <p class="hero-date">
-                08. maj 2027.
-            </p>
-
-            <a
-                class="scroll-cue"
-                href="#story"
-                aria-label="Nastavi"
-            >
-                ↓
-            </a>
-
+            <p class="eyebrow">Pozivamo vas da budete sa nama</p>
+            <h1>Jelena <span>&amp;</span> Aleksandar</h1>
+            <p class="hero-date">08. maj 2027.</p>
+            <a class="scroll-cue" href="#story" aria-label="Nastavi">↓</a>
         </div>
-
     </section>
 
-
-    <!-- =====================================================
-         STORY / DATE
-         ===================================================== -->
-
-    <section
-        id="story"
-        class="section section-centered"
-    >
-
+    <!-- STORY / DATE -->
+    <section id="story" class="section section-centered">
         <div class="content-narrow reveal">
-
-            <p class="eyebrow">
-                Naš dan
-            </p>
-
-            <h2>
-                Jedan poseban dan<br>
-                želimo da proslavimo<br>
-                sa vama.
-            </h2>
+            <p class="eyebrow">Naš dan</p>
+            <h2>Jedan poseban dan<br>želimo da proslavimo<br>sa vama.</h2>
 
             <div class="date-block">
-
-                <div class="date-number">
-                    08
-                </div>
-
-                <div class="date-month">
-                    MAJ
-                </div>
-
-                <div class="date-year">
-                    2027
-                </div>
-
+                <div class="date-number">08</div>
+                <div class="date-month">MAJ</div>
+                <div class="date-year">2027</div>
             </div>
 
             <div class="event-times">
-
                 <div>
-                    <span>
-                        Skup zvanica
-                    </span>
-
-                    <strong>
-                        15:00
-                    </strong>
+                    <span>Skup zvanica</span>
+                    <strong>15:00</strong>
                 </div>
-
                 <div>
-                    <span>
-                        Ceremonija venčanja
-                    </span>
-
-                    <strong>
-                        16:00
-                    </strong>
+                    <span>Ceremonija venčanja</span>
+                    <strong>16:00</strong>
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
-    <!-- =====================================================
-         LOCATION
-         ===================================================== -->
-
-    <section
-        id="location"
-        class="section"
-    >
-
+    <!-- LOCATION -->
+    <section id="location" class="section">
         <div class="split-layout">
-
             <div class="split-content reveal">
-
-                <p class="eyebrow">
-                    Lokacija
-                </p>
-
-                <h2>
-                    Vinarija Kovačević<br>
-                    Irig
-                </h2>
-
-                <p class="muted">
-                    Kralja Petra 221, Irig.
-                </p>
-
-                <a
-                    class="text-link"
-                    href="https://www.google.com/maps/search/?api=1&query=Kralja%20Petra%20221%2C%20Irig"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
+                <p class="eyebrow">Lokacija</p>
+                <h2>Vinarija Kovačević<br>Irig</h2>
+                <p class="muted">Kralja Petra 221, Irig.</p>
+                <a class="text-link" href="https://www.google.com/maps/search/?api=1&query=Kralja%20Petra%20221%2C%20Irig" target="_blank" rel="noopener noreferrer">
                     Kako doći →
                 </a>
-
             </div>
-
-
             <div class="photo-frame reveal">
-
-                <img
-                    src="./images/vinarija.jpg"
-                    alt="Vinarija Kovačević"
-                >
-
+                <img src="./images/vinarija.jpg" alt="Vinarija Kovačević">
             </div>
-
         </div>
-
     </section>
 
-    <!-- =====================================================
-         RSVP
-         ===================================================== -->
-
-    <section
-        id="rsvp"
-        class="section section-rsvp"
-    >
-
+    <!-- RSVP -->
+    <section id="rsvp" class="section section-rsvp">
         <div class="container narrow">
-
             <div class="section-heading reveal">
-
-                <p class="eyebrow">
-                    RSVP
-                </p>
-
-                <h2>
-                    Potvrdite svoj dolazak
-                </h2>
-
-                <p>
-                    Molimo vas da potvrdite dolazak.
-                </p>
-
+                <p class="eyebrow">RSVP</p>
+                <h2>Potvrdite svoj dolazak</h2>
+                <p>Molimo vas da potvrdite dolazak.</p>
             </div>
 
-
-            <form
-                id="rsvpForm"
-                class="rsvp-form"
-                novalidate
-            >
-
-                <!-- Honeypot -->
-                <div
-                    class="honeypot"
-                    aria-hidden="true"
-                >
-
-                    <label for="website">
-                        Website
-                    </label>
-
-                    <input
-                        type="text"
-                        id="website"
-                        name="website"
-                        tabindex="-1"
-                        autocomplete="off"
-                    >
-
-                </div>
-
-                <!-- =================================================
-                     PERSON FILLING THE FORM
-                     ================================================= -->
-
+            <form id="rsvpForm" class="rsvp-form" novalidate>
                 <div class="primary-rsvp reveal">
-                
                     <div class="form-group">
-                    
-                        <label for="name">
-                            Ime i prezime
-                        </label>
-                    
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            placeholder="Ime i prezime"
-                            autocomplete="name"
-                            required
-                        >
-                    
+                        <label for="name">Ime i prezime</label>
+                        <input type="text" id="name" name="name" placeholder="Ime i prezime" autocomplete="name" required>
                     </div>
-                
-                
-                    <!-- =================================================
-                         ATTENDANCE
-                         ================================================= -->
-                
+
                     <fieldset class="form-group attendance-group">
-                    
-                        <legend>
-                            Da li dolazite?
-                        </legend>
-                    
+                        <legend>Da li dolazite?</legend>
                         <div class="radio-group">
-                        
                             <label class="radio-option">
-                            
-                                <input
-                                    type="radio"
-                                    name="attendance"
-                                    value="Da"
-                                    required
-                                >
-                            
-                                <span>
-                                    Dolazim
-                                </span>
-                            
+                                <input type="radio" name="attendance" value="Da" required>
+                                <span>Dolazim</span>
                             </label>
-                        
-                        
                             <label class="radio-option">
-                            
-                                <input
-                                    type="radio"
-                                    name="attendance"
-                                    value="Ne"
-                                >
-                            
-                                <span>
-                                    Nažalost, ne
-                                </span>
-                            
+                                <input type="radio" name="attendance" value="Ne">
+                                <span>Nažalost, ne</span>
                             </label>
-                        
                         </div>
-                    
                     </fieldset>
-                
-                
-                    <!-- =================================================
-                         DETAILS FOR MAIN PERSON
-                         Shown only when "Dolazim" is selected
-                         ================================================= -->
-                
-                    <div
-                        id="mainGuestDetails"
-                        class="main-guest-details is-hidden"
-                    >
-                
+
+                    <div id="mainGuestDetails" class="main-guest-details is-hidden">
                         <fieldset class="form-group">
-                        
-                            <legend>
-                                Meni
-                            </legend>
-                        
+                            <legend>Meni</legend>
                             <div class="radio-group">
-                            
                                 <label class="radio-option">
-                                
-                                    <input
-                                        type="radio"
-                                        name="mainMenu"
-                                        value="Standardni"
-                                    >
-                                    <span>
-                                        Standardni
-                                    </span>
-                                
-                                </label>
-                            
-                            
-                                <label class="radio-option">
-                                
-                                    <input
-                                        type="radio"
-                                        name="mainMenu"
-                                        value="Vegetarijanski"
-                                    >
-                                
-                                    <span>
-                                        Vegetarijanski
-                                    </span>
-                                
+                                    <input type="radio" name="mainMenu" value="Standardni">
+                                    <span>Standardni</span>
                                 </label>
                                 <label class="radio-option">
-                                
-                                    <input
-                                        type="radio"
-                                        name="mainMenu"
-                                        value="Dečji"
-                                    >
-                                
-                                    <span>
-                                        Dečji
-                                    </span>
-                                
+                                    <input type="radio" name="mainMenu" value="Vegetarijanski">
+                                    <span>Vegetarijanski</span>
                                 </label>
-                            
+                                <label class="radio-option">
+                                    <input type="radio" name="mainMenu" value="Dečji">
+                                    <span>Dečji</span>
+                                </label>
                             </div>
-                        
                         </fieldset>
-                    
                     </div>
-                
                 </div>
 
-
-                <!-- =================================================
-                     ADDITIONAL GUESTS
-                     ================================================= -->
-
-                <div
-                    id="attendingDetails"
-                    class="attending-details is-hidden"
-                >
-
+                <div id="attendingDetails" class="attending-details is-hidden">
                     <div class="subsection-heading">
-                    
-                        <p class="eyebrow">
-                            Gosti
-                        </p>
-                    
-                        <h3>
-                            Da li neko dolazi sa vama?
-                        </h3>
-                    
+                        <p class="eyebrow">Gosti</p>
+                        <h3>Da li neko dolazi sa vama?</h3>
                     </div>
-                
-                    <div
-                        id="guestsContainer"
-                        class="guests-container"
-                    ></div>
-                
-                
-                    <button
-                        type="button"
-                        id="addGuestButton"
-                        class="button button-secondary add-guest-button"
-                    >
+                    <div id="guestsContainer" class="guests-container"></div>
+                    <button type="button" id="addGuestButton" class="button button-secondary add-guest-button">
                         + Dodaj gosta
                     </button>
-                
                 </div>
 
-
-                <!-- =================================================
-                     ACCOMMODATION
-                     ================================================= -->
-
-                <fieldset
-                    id="accommodationGroup"
-                    class="form-group is-hidden"
-                >
-
-                    <legend>
-                        Da li vam je potreban smeštaj?
-                    </legend>
-                
+                <fieldset id="accommodationGroup" class="form-group is-hidden">
+                    <legend>Da li vam je potreban smeštaj?</legend>
                     <div class="radio-group">
-                    
                         <label class="radio-option">
-                        
-                            <input
-                                type="radio"
-                                name="accommodation"
-                                value="Da"
-                            >
-                        
-                            <span>
-                                Da
-                            </span>
-                        
+                            <input type="radio" name="accommodation" value="Da">
+                            <span>Da</span>
                         </label>
-                    
-                    
                         <label class="radio-option">
-                        
-                            <input
-                                type="radio"
-                                name="accommodation"
-                                value="Ne"
-                            >
-                        
-                            <span>
-                                Ne
-                            </span>
-                        
+                            <input type="radio" name="accommodation" value="Ne">
+                            <span>Ne</span>
                         </label>
-                    
                     </div>
-                
                 </fieldset>
 
-                <!-- =================================================
-                     NOTE
-                     ================================================= -->
-
                 <div class="form-group reveal">
-
                     <label for="note">
-
-                        Napomena
-
-                        <span class="optional">
-                            (opciono)
-                        </span>
-
+                        Napomena <span class="optional">(opciono)</span>
                     </label>
-
-                    <textarea
-                        id="note"
-                        name="note"
-                        rows="4"
-                        placeholder="Ako želite još nešto da podelite sa nama..."
-                    ></textarea>
-
+                    <textarea id="note" name="note" rows="4" placeholder="Ako želite još nešto da podelite sa nama..."></textarea>
                 </div>
 
-
-                <!-- =================================================
-                     SUBMIT
-                     ================================================= -->
-
-                <button
-                    type="submit"
-                    class="button button-primary reveal"
-                >
-                    Pošalji potvrdu
-                </button>
-
-
-                <p
-                    id="rsvpStatus"
-                    class="form-status"
-                    role="status"
-                    aria-live="polite"
-                ></p>
-
+                <button type="submit" class="button button-primary reveal">Pošalji potvrdu</button>
+                <p id="rsvpStatus" class="form-status" role="status" aria-live="polite"></p>
             </form>
-
         </div>
-
     </section>
-
 </main>
 
-
-<!-- =========================================================
-     FOOTER
-     ========================================================= -->
-
 <footer class="site-footer">
-
-    <div class="monogram">
-        J &amp; A
-    </div>
-
-    <p>
-        08 · 05 · 2027
-    </p>
-
-    <p>
-        Vidimo se. ♡
-    </p>
-
+    <div class="monogram">J &amp; A</div>
+    <p>08 · 05 · 2027</p>
+    <p>Vidimo se. ♡</p>
 </footer>
 
-
-<script
-    type="module"
-    src="./js/main.js"
-></script>
-
+<script type="module" src="./js/main.js"></script>
 </body>
 </html>
