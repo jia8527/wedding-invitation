@@ -4,8 +4,8 @@ export function initRSVP() {
 // =========================================================
 
 const RSVP_API_URL =
-    "https://script.google.com/macros/s/AKfycbxzAejiKgeFWKm6mYd-6fEvOO78t4qz_F7Ovo7hggA79X2ud3mGXd_YxOEYFBdf7Lw/exec";
-
+    "https://script.google.com/macros/s/AKfycbxEh5qUZ_B7hT35mhRzkffSLJT0j5UaReRy49998d1URlDT9sO-MNyLvLU08-jSsDFv/exec";
+    
 const MAX_GUESTS = 10;
 
 
@@ -80,25 +80,7 @@ function isValidName(value) {
 
     const name = value.trim();
 
-    if (!name) {
-        return false;
-    }
-
-    /*
-     * Dozvoljava:
-     * - jedno ili više imena/reči
-     * - srpska i druga latinična slova
-     * - razmak
-     * - crtica
-     * - apostrof
-     *
-     * Ne dozvoljava brojeve niti druge specijalne karaktere.
-     */
-
-    const namePattern =
-        /^[A-Za-zČĆŽŠĐčćžšđÀ-ž]+(?:[\s'-][A-Za-zČĆŽŠĐčćžšđÀ-ž]+)*$/;
-
-    return namePattern.test(name);
+    return name.length > 0;
 }
 
 function setFieldError(input, message) {
@@ -614,7 +596,7 @@ document.addEventListener(
 
             setFieldError(
                 input,
-                "Unesite ime i prezime."
+                "Unesite ime ili nadimak."
             );
 
         } else {
@@ -707,7 +689,7 @@ function validateForm() {
 
         setFieldError(
             nameInput,
-            "Molimo unesite ime i prezime."
+            "Molimo unesite ime ili nadimak."
         );
 
         valid = false;
@@ -718,7 +700,7 @@ function validateForm() {
 
         setFieldError(
             nameInput,
-            "Unesite ime i prezime."
+            "Unesite ime ili nadimak."
         );
 
         valid = false;
@@ -835,7 +817,7 @@ function validateForm() {
 
                     setFieldError(
                         nameInput,
-                        "Molimo unesite ime i prezime."
+                        "Molimo unesite ime ili nadimak."
                     );
 
                     valid = false;
@@ -848,7 +830,7 @@ function validateForm() {
 
                     setFieldError(
                         nameInput,
-                        "Unesite ime i prezime."
+                        "Unesite ime ili nadimak."
                     );
 
                     valid = false;
@@ -1010,12 +992,11 @@ form.addEventListener(
 
         try {
 
-            await fetch(
+            const response =
+                await fetch(
                 RSVP_API_URL,
                 {
                     method: "POST",
-
-                    mode: "no-cors",
 
                     headers: {
                         "Content-Type":
@@ -1026,8 +1007,39 @@ form.addEventListener(
                         JSON.stringify(
                             formData
                         )
-                }
-            );
+                    }
+                );
+
+
+            const responseText =
+                await response.text();
+
+
+            let responseData;
+
+
+            try {
+
+                responseData =
+                    JSON.parse(responseText);
+
+            } catch (parseError) {
+
+                throw new Error(
+                    "Server je vratio neispravan odgovor."
+                );
+
+            }
+
+
+            if (!responseData.success) {
+
+                throw new Error(
+                    responseData.error ||
+                    "Upis nije uspeo."
+                );
+
+            }
 
 
             showSuccess();
@@ -1041,7 +1053,9 @@ form.addEventListener(
             );
 
 
-            showError();
+            showError(
+                error.message
+            );
 
         } finally {
 
@@ -1099,9 +1113,10 @@ function showSuccess() {
 // ERROR
 // =========================================================
 
-function showError() {
+function showError(message) {
 
     rsvpStatus.textContent =
+        message ||
         "Došlo je do greške. Molimo pokušajte ponovo.";
 
     rsvpStatus.className =
