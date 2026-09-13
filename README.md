@@ -24,9 +24,6 @@ css/style.css
 js/main.js
     JavaScript entry point.
 
-js/navigation.js
-    Mobile navigation.
-
 js/animations.js
     Scroll reveal animations.
 
@@ -69,6 +66,10 @@ assets/fonts/
    google-apps-script/Code.gs
 
 6. Deploy the Apps Script as a Web App.
+
+    The account that owns the Apps Script receives an email notification
+    after each successful RSVP submission. The first deployment may ask
+    for permission to send email.
 
 7. Copy the Web App URL.
 

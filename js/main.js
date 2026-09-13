@@ -1,4 +1,3 @@
-import { initNavigation } from "./navigation.js";
 import { initAnimations } from "./animations.js";
 import { initRSVP } from "./rsvp.js";
 
@@ -55,7 +54,6 @@ function initEnvelope() {
 
 document.addEventListener("DOMContentLoaded", () => {
     resetPagePosition();
-    initNavigation();
     initAnimations();
     initRSVP();
     initEnvelope();

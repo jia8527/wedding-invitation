@@ -868,42 +868,6 @@ textarea::placeholder {
    ========================================================= */
 
 @media (max-width: 767px) {
-
-    .menu-toggle {
-        position: relative;
-
-        z-index: 12;
-
-        display: grid;
-
-        gap: 5px;
-
-        width: 32px;
-
-        border: 0;
-
-        background: transparent;
-
-        color: inherit;
-
-        padding: 5px 0;
-
-        cursor: pointer;
-    }
-
-
-    .menu-toggle > span:not(.sr-only) {
-        display: block;
-
-        height: 1px;
-
-        width: 100%;
-
-        background:
-            currentColor;
-    }
-
-
     .hero h1 {
         font-size:
             clamp(
@@ -1060,8 +1024,9 @@ textarea::placeholder {
     justify-content: center;
     overflow: hidden;
     background:
-        radial-gradient(circle at 50% 28%, rgba(255, 255, 255, .5), transparent 44%),
-        #CBD5DA;
+        radial-gradient(circle at 50% 28%, rgba(247, 249, 244, .58), transparent 42%),
+        radial-gradient(circle at 50% 112%, rgba(77, 119, 117, .12), transparent 50%),
+        #B8B5A8;
     transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
@@ -1098,11 +1063,13 @@ textarea::placeholder {
     width: min(86vw, 430px);
     aspect-ratio: 1.5 / 1;
     background: #E8E0D2;
-    border: 1px solid #B7A78F;
+    border: 1px solid #B5A58E;
     border-radius: 4px;
     box-shadow:
-        0 22px 35px rgba(58, 60, 58, .18),
-        0 4px 9px rgba(58, 60, 58, .12);
+        0 28px 38px rgba(54, 61, 54, .24),
+        0 10px 14px rgba(54, 61, 54, .14),
+        0 2px 3px rgba(255, 255, 255, .22) inset,
+        0 0 0 1px rgba(104, 88, 69, .08);
 }
 
 .envelope-back,
@@ -1125,8 +1092,13 @@ textarea::placeholder {
             transparent 1px,
             transparent 4px
         ),
+        linear-gradient(115deg, rgba(255, 255, 255, .16), transparent 42%),
         #D8CEBC;
     border-radius: 4px;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .28),
+        inset 0 -8px 14px rgba(95, 79, 61, .09),
+        inset 0 0 0 1px rgba(119, 99, 75, .12);
 }
 
 .invitation-card {
@@ -1136,7 +1108,9 @@ textarea::placeholder {
     left: 6%;
     right: 6%;
     bottom: 6%;
-    background: #FBF8F1;
+    background:
+        linear-gradient(rgba(251, 248, 241, .8), rgba(251, 248, 241, .8)),
+        url("../images/jia2.jpg") center / cover no-repeat;
     border: 1px solid #E3D9C9;
     border-radius: 3px;
     display: flex;
@@ -1175,15 +1149,17 @@ textarea::placeholder {
 .flap-left {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #FAF6EE 0%, #EFE7D8 100%);
+    background: linear-gradient(135deg, #FAF6EE 0%, #EFE7D8 72%, #DDD0BE 100%);
     clip-path: polygon(0 0, 50% 48%, 0 100%);
+    filter: drop-shadow(3px 1px 3px rgba(76, 65, 52, .1));
 }
 
 .flap-right {
     position: absolute;
     inset: 0;
-    background: linear-gradient(-135deg, #FAF6EE 0%, #EFE7D8 100%);
+    background: linear-gradient(-135deg, #FAF6EE 0%, #EFE7D8 72%, #DDD0BE 100%);
     clip-path: polygon(100% 0, 50% 48%, 100% 100%);
+    filter: drop-shadow(-3px 1px 3px rgba(76, 65, 52, .1));
 }
 
 .flap-bottom {
@@ -1191,7 +1167,7 @@ textarea::placeholder {
     inset: 0;
     background: linear-gradient(0deg, #EADFCF 0%, #F5EFE3 100%);
     clip-path: polygon(0 100%, 50% 48%, 100% 100%);
-    filter: drop-shadow(0 -3px 4px rgba(92, 78, 64, .12));
+    filter: drop-shadow(0 -4px 5px rgba(92, 78, 64, .17));
 }
 
 .envelope-flap-top {
@@ -1202,7 +1178,7 @@ textarea::placeholder {
     clip-path: polygon(0 0, 100% 0, 50% 60%);
     transform-origin: top center;
     transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
-    filter: drop-shadow(0 7px 8px rgba(92, 78, 64, .2));
+    filter: drop-shadow(0 8px 9px rgba(92, 78, 64, .24));
 }
 
 .envelope-flap-edge {
@@ -1233,8 +1209,9 @@ textarea::placeholder {
     content: "";
     position: absolute;
     inset: 7px;
-    border: 1.5px dashed #C3B7A3;
-    opacity: 0.8;
+    border: 1px dashed #B7A993;
+    opacity: 0.72;
+    filter: drop-shadow(0 1px 0 rgba(255, 255, 255, .35));
 }
 
 .flap-left::after { clip-path: polygon(0 0, 50% 48%, 0 100%); }
@@ -1243,6 +1220,11 @@ textarea::placeholder {
 
 .envelope-flap-top::after {
     display: none;
+}
+
+.envelope-flap-top {
+    outline: 1px solid rgba(174, 152, 123, .22);
+    outline-offset: -1px;
 }
 
 /* WAX SEAL (STARI STIL PEČATA) */
@@ -1254,21 +1236,35 @@ textarea::placeholder {
     transform: translate(-50%, -50%);
     width: 54px;
     height: 54px;
-    border-radius: 50%;
+    border-radius: 47% 53% 50% 48%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at 35% 30%, #C98C86 0%, #A96765 100%);
-    box-shadow: 0 5px 12px rgba(74, 60, 57, .2), inset 0 1px 2px rgba(255, 255, 255, .35);
+    background:
+        radial-gradient(circle at 32% 25%, rgba(235, 170, 153, .7), transparent 20%),
+        radial-gradient(circle at 38% 32%, #C98C86 0%, #A96765 64%, #895756 100%);
+    box-shadow:
+        0 7px 14px rgba(74, 60, 57, .28),
+        0 2px 3px rgba(255, 255, 255, .34) inset,
+        0 -2px 3px rgba(91, 47, 47, .22) inset;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .wax-seal::before {
     content: "";
     position: absolute;
-    inset: 4px;
-    border: 1px dashed rgba(255, 240, 230, 0.4);
+    inset: 5px;
+    border: 1px dashed rgba(255, 240, 230, 0.46);
+    border-radius: 48% 52% 49% 51%;
+    box-shadow: 0 0 0 1px rgba(116, 57, 57, .2) inset;
+}
+
+.wax-seal::after {
+    content: "";
+    position: absolute;
+    inset: 8px;
     border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(255, 235, 222, .2) inset;
 }
 
 .wax-seal span {
