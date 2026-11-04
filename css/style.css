@@ -151,11 +151,23 @@ button {
     line-height: .82;
 }
 
-.hero h1 span {
+.hero h1 .hero-name {
     display: block;
+    width: fit-content;
+    margin-inline: auto;
+}
+
+.hero h1 .hero-ampersand {
+    display: block;
+    width: fit-content;
     font-size: .48em;
     line-height: 1;
-    margin: .15em 0;
+    margin: .15em auto;
+}
+
+.invitation-name,
+.invitation-ampersand {
+    display: inline-block;
 }
 
 .hero-date {
@@ -1250,7 +1262,6 @@ textarea::placeholder {
 .flap-left::after { clip-path: polygon(0 0, 50% 48%, 0 100%); }
 .flap-right::after { clip-path: polygon(100% 0, 50% 48%, 100% 100%); }
 .flap-bottom::after { clip-path: polygon(0 100%, 50% 48%, 100% 100%); }
-
 .envelope-flap-top::after {
     display: none;
 }
@@ -1335,7 +1346,7 @@ textarea::placeholder {
 }
 
 .envelope-intro.is-opening .invitation-card {
-    animation: peekCard 2s cubic-bezier(0.25, 1, 0.5, 1) 0.4s forwards;
+    animation: peekCard 2s cubic-bezier(0.25, 1, 0.5, 1) 0.5s forwards;
 }
 
 @keyframes peekCard {

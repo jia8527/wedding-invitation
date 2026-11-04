@@ -52,7 +52,9 @@ function initEnvelope() {
         intro.classList.add("is-opening");
 
         // Kartica ostaje izvučena dovoljno dugo da se monogram pročita.
-        setTimeout(() => {
+        setTimeout(async () => {
+            await document.fonts.ready;
+
             const paperRect = paper.getBoundingClientRect();
             const titleRect = heroTitle.getBoundingClientRect();
             const transitionPaper = paper.cloneNode(true);
@@ -60,7 +62,23 @@ function initEnvelope() {
             const transitionMessage = transitionPaper.querySelector(".invitation-message");
             const transitionDate = transitionPaper.querySelector(".invitation-date");
 
-            if (!transitionMonogram || !transitionMessage || !transitionDate) {
+            if (
+                !transitionMonogram ||
+                !transitionMessage ||
+                !transitionDate
+            ) {
+                unlockPage();
+                return;
+            }
+
+            const sourceNameElements = [
+                ...transitionMonogram.querySelectorAll(".invitation-name, .invitation-ampersand")
+            ];
+            const targetNameElements = [
+                ...heroTitle.querySelectorAll(".hero-name, .hero-ampersand")
+            ];
+
+            if (sourceNameElements.length !== 3 || targetNameElements.length !== 3) {
                 unlockPage();
                 return;
             }
@@ -74,14 +92,6 @@ function initEnvelope() {
                 easing: "cubic-bezier(0.65, 0, 0.35, 1)",
                 fill: "forwards"
             };
-            const text = transitionMonogram.textContent;
-            const ampersandIndex = text.indexOf("&");
-
-            if (ampersandIndex < 0) {
-                unlockPage();
-                return;
-            }
-
             transitionPaper.setAttribute("aria-hidden", "true");
             Object.assign(transitionPaper.style, {
                 position: "fixed",
@@ -146,24 +156,18 @@ function initEnvelope() {
                 const rect = range?.getBoundingClientRect();
                 return rect && rect.width && rect.height ? rect : null;
             };
-            const sourceNameRanges = [
-                rangeForText(transitionMonogram, 0, ampersandIndex - 1),
-                rangeForText(transitionMonogram, ampersandIndex, ampersandIndex + 1),
-                rangeForText(transitionMonogram, ampersandIndex + 2, text.length)
-            ];
-            const targetNameRanges = [
-                rangeForText(heroTitle, 0, ampersandIndex - 1),
-                rangeForText(heroTitle, ampersandIndex, ampersandIndex + 1),
-                rangeForText(heroTitle, ampersandIndex + 2, text.length)
-            ];
             const sourceDateRange = rangeForText(
                 transitionDate,
                 0,
                 transitionDate.textContent.length
             );
             const targetDateRange = rangeForText(heroDate, 0, heroDate.textContent.length);
-            const sourceNameRects = sourceNameRanges.map(rectForRange);
-            const targetNameRects = targetNameRanges.map(rectForRange);
+            const sourceNameRects = sourceNameElements.map((element) =>
+                element.getBoundingClientRect()
+            );
+            const targetNameRects = targetNameElements.map((element) =>
+                element.getBoundingClientRect()
+            );
             const sourceDateRect = rectForRange(sourceDateRange);
             const targetDateRect = rectForRange(targetDateRange);
 
@@ -178,38 +182,92 @@ function initEnvelope() {
                 return;
             }
 
-            const monogramRect = transitionMonogram.getBoundingClientRect();
-            const nameSegments = [
-                text.slice(0, ampersandIndex).trim(),
-                "&",
-                text.slice(ampersandIndex + 1).trim()
-            ].map((segmentText, index) => {
-                const segment = document.createElement("span");
-                const sourceRect = sourceNameRects[index];
-                segment.textContent = segmentText;
-                Object.assign(segment.style, {
-                    position: "absolute",
-                    left: `${sourceRect.left - monogramRect.left}px`,
-                    top: `${sourceRect.top - monogramRect.top}px`,
-                    display: "block",
-                    whiteSpace: "pre",
-                    transformOrigin: "0 0"
-                });
-                return segment;
-            });
-            Object.assign(transitionMonogram.style, {
-                position: "relative",
-                width: `${monogramRect.width}px`,
-                height: `${monogramRect.height}px`,
-                flex: "0 0 auto"
-            });
-            transitionMonogram.replaceChildren(...nameSegments);
-
-            const targetTextRects = [
-                ...targetNameRects,
-                targetDateRect
+            const sourceRects = [...sourceNameRects, sourceDateRect];
+            const targetRects = [...targetNameRects, targetDateRect];
+            const textTargets = [...targetNameElements, heroDate];
+            const cardStyle = getComputedStyle(transitionPaper);
+            const borderLeft = parseFloat(cardStyle.borderLeftWidth);
+            const borderTop = parseFloat(cardStyle.borderTopWidth);
+            const sourceColors = [
+                ...sourceNameElements.map((element) => getComputedStyle(element).color),
+                getComputedStyle(transitionDate).color
             ];
-            const contentBounds = targetTextRects.reduce((bounds, rect) => ({
+            const textSegments = [...sourceNameElements, transitionDate].map(
+                (source, index) => {
+                    const targetStyle = getComputedStyle(textTargets[index]);
+                    const segment = document.createElement("span");
+                    segment.textContent = source.textContent;
+                    Object.assign(segment.style, {
+                        position: "absolute",
+                        left: `${sourceRects[index].left - paperRect.left - borderLeft}px`,
+                        top: `${sourceRects[index].top - paperRect.top - borderTop}px`,
+                        display: "block",
+                        width: "max-content",
+                        margin: "0",
+                        whiteSpace: "pre",
+                        transformOrigin: "0 0",
+                        color: sourceColors[index],
+                        fontFamily: targetStyle.fontFamily,
+                        fontSize: targetStyle.fontSize,
+                        fontWeight: targetStyle.fontWeight,
+                        fontStyle: targetStyle.fontStyle,
+                        lineHeight: targetStyle.lineHeight,
+                        letterSpacing: targetStyle.letterSpacing,
+                        textTransform: targetStyle.textTransform
+                    });
+                    return segment;
+                }
+            );
+            transitionMonogram.remove();
+            transitionDate.remove();
+            transitionPaper.append(...textSegments);
+
+            const naturalTextRects = textSegments.map((segment) =>
+                segment.getBoundingClientRect()
+            );
+            const naturalGlyphRects = textSegments.map((segment) =>
+                rectForRange(rangeForText(segment, 0, segment.textContent.length))
+            );
+
+            if (naturalGlyphRects.some((rect) => !rect)) {
+                transitionPaper.remove();
+                unlockPage();
+                return;
+            }
+
+            textSegments.forEach((segment, index) => {
+                const sourceRect = sourceRects[index];
+                const naturalRect = naturalTextRects[index];
+                const naturalGlyphRect = naturalGlyphRects[index];
+
+                if (index === 3) {
+                    Object.assign(segment.style, {
+                        left: `${parseFloat(segment.style.left) -
+                        (naturalGlyphRect.left - naturalRect.left)}px`,
+                        top: `${parseFloat(segment.style.top) -
+                        (naturalGlyphRect.top - naturalRect.top)}px`
+                    });
+                }
+
+                const scaleX = sourceRect.width / naturalGlyphRect.width;
+                const scaleY = sourceRect.height / naturalGlyphRect.height;
+                Object.assign(segment.style, {
+                    transform:
+                        index === 3
+                            ? `scale(${scaleY})`
+                            : `scale(${scaleX}, ${scaleY})`
+                });
+            });
+
+            const sourceTextRects = textSegments.map((segment, index) =>
+                index === 3
+                    ? rectForRange(rangeForText(segment, 0, segment.textContent.length))
+                    : segment.getBoundingClientRect()
+            );
+            const animationTextRects = naturalTextRects.map((rect, index) =>
+                index === 3 ? naturalGlyphRects[index] : rect
+            );
+            const contentBounds = targetRects.reduce((bounds, rect) => ({
                 left: Math.min(bounds.left, rect.left),
                 top: Math.min(bounds.top, rect.top),
                 right: Math.max(bounds.right, rect.right),
@@ -241,20 +299,9 @@ function initEnvelope() {
             };
             const paperTranslateX = contentCenter.x - transitionPaperCenter.x;
             const paperTranslateY = contentCenter.y - transitionPaperCenter.y;
-            const transitioningTexts = [
-                ...nameSegments,
-                transitionDate
-            ];
-            const sourceTextRects = [
-                ...nameSegments.map((segment) => segment.getBoundingClientRect()),
-                sourceDateRect
-            ];
-            const targetRects = [
-                ...targetNameRects,
-                targetDateRect
-            ];
-            const textAnimations = transitioningTexts.map((element, index) => {
+            const textAnimations = textSegments.map((element, index) => {
                 const sourceRect = sourceTextRects[index];
+                const naturalRect = animationTextRects[index];
                 const targetRect = targetRects[index];
                 const mappedLeft = contentCenter.x +
                     (sourceRect.left - transitionPaperCenter.x) * paperScale;
@@ -262,13 +309,13 @@ function initEnvelope() {
                     (sourceRect.top - transitionPaperCenter.y) * paperScale;
                 const translateX = (targetRect.left - mappedLeft) / paperScale;
                 const translateY = (targetRect.top - mappedTop) / paperScale;
-                const scaleX = targetRect.width / (sourceRect.width * paperScale);
-                const scaleY = targetRect.height / (sourceRect.height * paperScale);
+                const scaleX = targetRect.width / (naturalRect.width * paperScale);
+                const scaleY = targetRect.height / (naturalRect.height * paperScale);
 
                 element.style.transformOrigin = "0 0";
                 return element.animate(
                     [
-                        { transform: "translate(0px, 0px) scale(1, 1)" },
+                        { transform: element.style.transform },
                         {
                             transform:
                                 `translate(${translateX}px, ${translateY}px) ` +
@@ -278,16 +325,12 @@ function initEnvelope() {
                     timing
                 );
             });
-            const textColorAnimations = [
-                transitionMonogram.animate(
-                    [{ color: getComputedStyle(transitionMonogram).color }, { color: "#fff" }],
-                    timing
-                ),
-                transitionDate.animate(
-                    [{ color: getComputedStyle(transitionDate).color }, { color: "#fff" }],
+            const textColorAnimations = textSegments.map((element) =>
+                element.animate(
+                    [{ color: element.style.color }, { color: "#fff" }],
                     timing
                 )
-            ];
+            );
 
             paper.style.visibility = "hidden";
             scene.animate(
@@ -326,7 +369,7 @@ function initEnvelope() {
                     ],
                     { duration: 250, easing: "ease-out", fill: "forwards" }
                 );
-                const textFade = transitioningTexts.map((element) =>
+                const textFade = textSegments.map((element) =>
                     element.animate(
                         [{ opacity: 1 }, { opacity: 0 }],
                         { duration: 250, easing: "ease-out", fill: "forwards" }
@@ -341,7 +384,7 @@ function initEnvelope() {
                     setTimeout(unlockPage, 350);
                 });
             });
-        }, 3200);
+        }, 3600);
     };
 
     scene.addEventListener("click", (event) => {
