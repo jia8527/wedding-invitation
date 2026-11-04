@@ -147,7 +147,7 @@ button {
     margin: 0;
     font-family: var(--font-heading);
     font-size: clamp(4rem, 10vw, 9rem);
-    font-weight: 500;
+    font-weight: 400;
     line-height: .82;
 }
 
@@ -1404,6 +1404,10 @@ textarea::placeholder {
 }
 
 @media (max-height: 500px) {
+    .hero-media img {
+        object-position: center 20%;
+    }
+
     .hero h1 {
         font-size: clamp(2.5rem, 12vh, 4rem);
     }
